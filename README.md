@@ -75,3 +75,168 @@ I doubted my eyes (and brain), but Rust app takes around 30 **secs**.
 ### The Reuslt
 Rust app is x4 faster than Golang. Therefore, Rustlang has better performance
 than Go in calculating Fibonacci Numbers.
+
+## 2. Http
+
+Next, this is what all web-backend developers want to know, which language has
+better throughput? Here is the result:
+
+### Golang
+```
+    hyamamoto@hyamamoto-home (pts/3)    ~/Doc/W/go-vs-rust/go     master !1  ab -n 16000000 -c $(nproc) 'http://localhost:5000/'              22 ✘  14:19:11 
+This is ApacheBench, Version 2.3 <$Revision: 1874286 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 1600000 requests
+Completed 3200000 requests
+Completed 4800000 requests
+Completed 6400000 requests
+Completed 8000000 requests
+Completed 9600000 requests
+Completed 11200000 requests
+Completed 12800000 requests
+Completed 14400000 requests
+Completed 16000000 requests
+Finished 16000000 requests
+
+
+Server Software:
+Server Hostname:        localhost
+Server Port:            5000
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      16
+Time taken for tests:   551.510 seconds
+Complete requests:      16000000
+Failed requests:        0
+Total transferred:      2048000000 bytes
+HTML transferred:       176000000 bytes
+Requests per second:    29011.27 [#/sec] (mean)
+Time per request:       0.552 [ms] (mean)
+Time per request:       0.034 [ms] (mean, across all concurrent requests)
+Transfer rate:          3626.41 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       4
+Processing:     0    0   0.1      0      11
+Waiting:        0    0   0.1      0      10
+Total:          0    1   0.1      1      11
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      1
+  95%      1
+  98%      1
+  99%      1
+ 100%     11 (longest request)
+```
+
+So Golang app can handle **around 2900 requests per a second**.
+
+### Rust
+```
+    hyamamoto@hyamamoto-home (pts/3)    ~/Doc/W/go-vs-rust/go     master !1  ab -n 16000000 -c $(nproc) 'http://localhost:5000/'     ✔  9m 22s    14:28:43 
+This is ApacheBench, Version 2.3 <$Revision: 1874286 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 1600000 requests
+Completed 3200000 requests
+Completed 4800000 requests
+Completed 6400000 requests
+Completed 8000000 requests
+Completed 9600000 requests
+Completed 11200000 requests
+Completed 12800000 requests
+Completed 14400000 requests
+Completed 16000000 requests
+Finished 16000000 requests
+
+
+Server Software:
+Server Hostname:        localhost
+Server Port:            5000
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      16
+Time taken for tests:   527.022 seconds
+Complete requests:      16000000
+Failed requests:        0
+Total transferred:      2048000000 bytes
+HTML transferred:       176000000 bytes
+Requests per second:    30359.25 [#/sec] (mean)
+Time per request:       0.527 [ms] (mean)
+Time per request:       0.033 [ms] (mean, across all concurrent requests)
+Transfer rate:          3794.91 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       2
+Processing:     0    0   0.1      0      11
+Waiting:        0    0   0.1      0      11
+Total:          0    1   0.1      0      11
+ERROR: The median and mean for the total time are more than twice the standard
+       deviation apart. These results are NOT reliable.
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      1
+  75%      1
+  80%      1
+  90%      1
+  95%      1
+  98%      1
+  99%      1
+ 100%     11 (longest request)
+```
+
+So, Rust can handle around 30300 requests per a seconds.
+
+### The Result
+Hmm... I don't think Rust has better performance compared with go in
+this simple "hello world"application.
+However, using Rust as web server with high-computing cost will make difference
+from go as described fib section.
+
+## File Size
+
+### Golang
+```
+    hyamamoto@hyamamoto-home (pts/3)    ~/Doc/W/go-vs-rust     master !1  ls -lh go/bin                                                          ✔  14:53:11 
+total 9.4M
+-rwxr-xr-x 1 hyamamoto hyamamoto 2.2M Jul 11 13:39 fib
+-rwxr-xr-x 1 hyamamoto hyamamoto 7.2M Jul 11 13:39 http
+```
+
+### Rust
+```
+    hyamamoto@hyamamoto-home (pts/3)    ~/Doc/W/go-vs-rust     master !1  ls -lh rust/target/release                                             ✔  14:53:17 
+total 7.8M
+-rwxr-xr-x  2 hyamamoto hyamamoto 3.1M Jul 11 13:46 fib
+-rwxr-xr-x  2 hyamamoto hyamamoto 4.7M Jul 11 13:46 http
+```
+
+### The Result
+The fibonacci app written in Go is smaller than Rust, and the web app written in
+Rust is smaller than Go.
+
+## Conclusion
+The apps written in Rust is faster than Golang in a compute situation, but there's
+nothing special in a simple web server situation. Therefore, Rust seems to have
+advantages and non-advantages, including its difficulty to study.
+
+## Which language you should study?
+The both, of course. But Go has simple syntax. So, I'd like you to study Golang
+first. Rust is difficult a little because of ownership and lifetime, but it is
+very valuable to study them.

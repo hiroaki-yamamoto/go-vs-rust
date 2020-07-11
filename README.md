@@ -139,7 +139,7 @@ Percentage of the requests served within a certain time (ms)
  100%     11 (longest request)
 ```
 
-So Golang app can handle **around 2900 requests per a second**.
+So Golang app can handle **around 29000 requests per a second**.
 
 ### Rust
 ```
@@ -201,13 +201,11 @@ Percentage of the requests served within a certain time (ms)
  100%     11 (longest request)
 ```
 
-So, Rust can handle around 30300 requests per a seconds.
+So, Rust can handle around **30300 requests per a second**.
 
 ### The Result
-Hmm... I don't think Rust has better performance compared with go in
-this simple "hello world"application.
-However, using Rust as web server with high-computing cost will make difference
-from go as described fib section.
+The Rust web server is about 4.5% faster than Go web server. So, rust can handle
+the request faster than go a little in this simple case.
 
 ## File Size
 

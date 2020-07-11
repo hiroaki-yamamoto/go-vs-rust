@@ -70,7 +70,7 @@ golang app takes around 2 minutes.
 (Super big number)
 ./target/release/fib 1048576  25.65s user 1.40s system 99% cpu 27.083 total
 ```
-I doubted my eyes (and brains), but Rust app takes around 30 **secs**.
+I doubted my eyes (and brain), but Rust app takes around 30 **secs**.
 
 ### The Reuslt
 Rust app is x4 faster than Golang. Therefore, Rustlang has better performance

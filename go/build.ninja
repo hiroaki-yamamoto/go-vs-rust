@@ -3,3 +3,4 @@ rule go
 
 build bin/fib: go fib.go
 build bin/http: go http.go
+build bin/fib_gmp: go fib_gmp.go

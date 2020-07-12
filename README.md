@@ -62,7 +62,17 @@ I calculated fib(2^20 = 1048576) in Go and Rust. Here is the result:
 ./bin/fib 1048576  198.51s user 24.31s system 180% cpu 2:03.65 total
 ```
 
-golang app takes around 2 minutes.
+golang app takes around 2 minutes, but after I researched `math/big` code, it
+uses Karatsuba algorithm while `rug` (Multi Precision Libary for Rust) uses GMP
+that uses FFT. i.e. `math/big` takes O(n^(log 3)) while `rug` takes O(n log n).
+So, I re-wrote the go code to use GMP. Here is the "re-wrote" result:
+
+```
+    hyamamoto@hyamamoto-home (pts/1)    ~/Doc/W/go-vs-rust     master !4 ?1  time ./go/bin/fib_gmp 1048576                                       ✔  09:17:28 
+./go/bin/fib_gmp 1048576  72.74s user 13.31s system 117% cpu 1:13.52 total
+```
+
+So.. it takes around 1 mins and 10 secs.
 
 ### Rust
 ```

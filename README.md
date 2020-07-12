@@ -83,7 +83,7 @@ So.. it takes around 1 mins and 10 secs.
 I doubted my eyes (and brain), but Rust app takes around 30 **secs**.
 
 ### The Reuslt
-Rust app is x4 faster than Golang. Therefore, Rustlang has better performance
+Rust app is x2 faster than Golang. Therefore, Rustlang has better performance
 than Go in calculating Fibonacci Numbers.
 
 ## 2. Http
